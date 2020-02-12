@@ -21,25 +21,43 @@ import java.util.*;
 public class Logical_String {
 	int solution(String s)
 	{
-		int n=0;
-		ArrayList al= new ArrayList();//list for numeric object
-		ArrayList bl= new ArrayList();// list for operator
+		
+		int t=0;
+		ArrayList<String> al= new ArrayList<String>();//list for numeric object
+		ArrayList<String> bl= new ArrayList<String>();// list for operator
+		int n=Integer.parseInt(al.get(t));
 		for(int i=0;i<s.length();i++)
 		{
+			Object r = s.charAt(i);
 			if(i%2==0)
 			{
-				al.add(s.charAt(i));
+				al.add(r.toString());
 			}
 			else
 			{
-				bl.add(s.charAt(i));
+				bl.add(r.toString());
 			}
+		    
 			if(i>=2 && i%2==0)
 			{
-				int t= i-1;
-				if((char)bl.get(t)=='A')
+				if(bl.get(t).equals("A"))
 				{
-					n= n |((int)al.get(t-1) & (int)al.get(t+1));
+					n= (n & Integer.parseInt(al.get(t+1)));
+					t++;
+				}
+				else {
+				if(bl.get(t).equals("B"))
+				{
+					n= (n | Integer.parseInt(al.get(t+1)));
+					t++;
+				}else
+				{
+				if(bl.get(t).equals("C"))
+				{
+					n= (n ^ Integer.parseInt(al.get(t+1)));
+					t++;
+				}
+				}
 				}
 			}
 		}
